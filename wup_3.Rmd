@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r include=FALSE}
 require(tidyverse)
 require(tigerstats)
-davisdata <- read.csv(file="UCDavis.csv")
+ucdavis1 <- read.csv(file="UCDavis.csv")
 ```
 ## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
 ## you choose to sit in??
@@ -24,21 +24,32 @@ Is the average amount of alcohol consumed per week different for the different s
 
 $H_0$: there is no difference in the average amount of alcohol consumed per week based on different seating rows.
 
-$H_A$: there is a difference in average alcohol consumed per week based on different seating rows.
+$H_A$: there is a difference in average alcohol consumed per week based on different between at least two seating rows.
 # Methods
 
 We predict alcohol consumption based on row. 
 alcohol ~ Seat
 
+Data from UC Davis:
 alcohol is a numerical variable. 
 Seat is a categorical variable.
 so we use the numerical ~ cat helper file.
+
+# Description
+## graphical description
+
+```{r}
+boxplot(alcohol~Seat,data=ucdavis1)
+```
+
+
+this box plot shows that people sitting in the back row tend to drink more
 
 
 ## Now with ggplot - first select the basic data
 
 ```{r}
-basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
+basicCN <- ggplot(ucdavis1,aes(y=alcohol,x=Seat))
 ```
 ## Now add in boxplot
 
