@@ -77,4 +77,4 @@ The HSD model shows that the seats in the back row drink more than people in the
 
 # Conclusion and Discussion
 
-The question was if there is a connection between alcohol consumed and the row you choose to sit it. We have proven that there a difference in alcohol consumption depending on rows sat in. The back row has been shown to drink more than the middle and front rows, 
+The question was if there is a connection between alcohol consumed and the row you choose to sit it. We have proven that there a difference in alcohol consumption depending on rows sat in, by the rejecting the null hypothesis of 0.00116 which is less than the critical value of 0.05 The back row has been proven to drink more than the middle and front rows.
