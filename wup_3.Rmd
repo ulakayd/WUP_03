@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r include=FALSE}
 require(tidyverse)
 require(tigerstats)
-ucdavis1 <- read.csv(file="UCDavis.csv")
+davisdata=read.csv('UCDavis.csv')
 ```
 ## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
 ## you choose to sit in??
@@ -36,6 +36,12 @@ Seat is a categorical variable.
 so we use the numerical ~ cat helper file.
 
 # Description
+
+Data from UC Davis:
+alcohol is a numerical variable. 
+Seat is a categorical variable.
+so we use the numerical ~ cat helper file.
+
 ## graphical description
 
 ```{r}
@@ -43,31 +49,32 @@ boxplot(alcohol~Seat,data=ucdavis1)
 ```
 
 
-this box plot shows that people sitting in the back row tend to drink more
+this box plot shows that people sitting in the back row tend to drink more than people in the front or middle rows.
 
 
-## Now with ggplot - first select the basic data
-
+## numerical description
 ```{r}
-basicCN <- ggplot(ucdavis1,aes(y=alcohol,x=Seat))
-```
-## Now add in boxplot
-
-```{r}
-basicCN + geom_boxplot()
-```
-  
-  
-### get fancy  
-
-```{r}
-basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
+favstats(alcohol~Seat,data=ucdavis1)
 ```
 
-## Numerical Summarys 
+The numerical graph shows the median for back seat consumption is 4 and front seat consumption is 0 and middle seat consumption is 1.
 
-## Inferential Tests
+## Inferential description
 
-## Conclusions
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+
+The P Value is 0.000116 is less than the critical value of 0.05. That means all students in all rows do not consume the same amount of alcohol 
+
+```{r}
+plot(TukeyHSD(model1))
+```
+
+The HSD model shows that the seats in the back row drink more than people in the middle row and the people the front row. There is no evidence in difference between the alcohol consumed by the middle and front rows.
 
 
+# Conclusion and Discussion
+
+The question was if there is a connection between alcohol consumed and the row you choose to sit it. We have proven that there a difference in alcohol consumption depending on rows sat in. The back row has been shown to drink more than the middle and front rows, 
